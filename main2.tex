@@ -1,0 +1,151 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{parskip}
+\geometry{margin=2.5cm}
+
+\title{Lernkarten – Datensicherheit}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Begriffsdefinitionen}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Was bedeutet Vertraulichkeit in der IT-Sicherheit?\\
+  \textbf{Antwort:} Schutz vor unzulässiger Kenntnisnahme oder unbefugtem Zugriff.
+
+  \item \textbf{Frage:} Was ist unter Integrität zu verstehen?\\
+  \textbf{Antwort:} Schutz vor unzulässigen Veränderungen von Daten.
+
+  \item \textbf{Frage:} Was bedeutet Verfügbarkeit?\\
+  \textbf{Antwort:} Informationen und Systeme sind bei Bedarf nutzbar.
+
+  \item \textbf{Frage:} Was ist Authentizität?\\
+  \textbf{Antwort:} Die nachprüfbare Echtheit eines Subjekts oder Objekts.
+
+  \item \textbf{Frage:} Was bedeutet Verbindlichkeit?\\
+  \textbf{Antwort:} Handlungen können eindeutig zugeordnet werden.
+
+  \item \textbf{Frage:} Was unterscheidet Security und Safety?\\
+  \textbf{Antwort:} 
+  \begin{itemize}
+    \item \textbf{Security:} Schutz vor äußeren Bedrohungen (z. B. durch Angreifer)
+    \item \textbf{Safety:} Schutz vor Gefahren, die vom System selbst ausgehen
+  \end{itemize}
+
+  \item \textbf{Frage:} Was besagt die Kettenregel der Sicherheit?\\
+  \textbf{Antwort:} Eine Sicherheitskette ist nur so stark wie ihr schwächstes Glied.
+
+  \item \textbf{Frage:} Nenne Typen von Angreifern.\\
+  \textbf{Antwort:} Innentäter, Hacker, Script-Kiddies, Wirtschaftsspione, Geheimdienste.
+
+  \item \textbf{Frage:} Nenne typische Angriffsarten.\\
+  \textbf{Antwort:} Sniffing, Spoofing, Man-in-the-Middle, (D)DoS.
+\end{itemize}
+
+\section*{Kryptologie}
+
+\subsection*{Kodierung vs. Chiffrierung}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Was unterscheidet Kodierung und Chiffrierung?\\
+  \textbf{Antwort:} 
+  \begin{itemize}
+    \item \textbf{Kodierung:} eindeutige Zuordnung \(f(x) = y\)
+    \item \textbf{Chiffrierung:} abhängig vom Schlüssel \(f(x, k) = y\)
+  \end{itemize}
+\end{itemize}
+
+\subsection*{Klassische Chiffren}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Was ist eine Cäsar-Verschlüsselung?\\
+  \textbf{Antwort:} Substitution, bei der Buchstaben um eine feste Anzahl Stellen verschoben werden (z. B. A → D bei +3).
+
+  \item \textbf{Frage:} Welche Chiffren zählen zu Substitutionschiffren?\\
+  \textbf{Antwort:} Cäsar, Vigenère, Playfair, Codebuch.
+
+  \item \textbf{Frage:} Welche zählen zu Transpositionschiffren?\\
+  \textbf{Antwort:} Skytale, Doppelwürfel.
+\end{itemize}
+
+\subsection*{Moderne Chiffren}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Welche Eigenschaften hat die XOR-Verknüpfung?\\
+  \textbf{Antwort:}
+  \begin{itemize}
+    \item Kommutativ: \(A \oplus B = B \oplus A\)
+    \item Assoziativ: \(A \oplus (B \oplus C) = (A \oplus B) \oplus C\)
+    \item Neutrales Element: \(A \oplus 0 = A\)
+    \item Selbstinvers: \(A \oplus A = 0\)
+  \end{itemize}
+
+  \item \textbf{Frage:} Was ist ein One-Time Pad?\\
+  \textbf{Antwort:}
+  \begin{itemize}
+    \item Zufälliger Schlüssel, genauso lang wie die Nachricht
+    \item Nur dem Sender/Empfänger bekannt
+    \item Wird nie wiederverwendet
+    \item Theoretisch unknackbar
+  \end{itemize}
+\end{itemize}
+
+\subsection*{Strom- vs. Blockchiffren}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Was unterscheidet Strom- und Blockchiffren?\\
+  \textbf{Antwort:}
+  \begin{itemize}
+    \item \textbf{Stromchiffren:} Bitweise Verschlüsselung (z. B. ChaCha20)
+    \item \textbf{Blockchiffren:} Verschlüsselung in Blöcken (z. B. AES, DES)
+  \end{itemize}
+\end{itemize}
+
+\subsection*{AES vs. DES}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Nenne drei Unterschiede zwischen AES und DES.\\
+  \textbf{Antwort:}
+  \begin{itemize}
+    \item Schlüssellänge: DES: 56 Bit, AES: 128–256 Bit
+    \item Blockgröße: DES: 64 Bit, AES: 128 Bit
+    \item Sicherheit: DES veraltet, AES gilt als sicher
+  \end{itemize}
+\end{itemize}
+
+\subsection*{Blockchiffren-Betriebsmodi}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Was ist ein Nachteil des ECB-Modus?\\
+  \textbf{Antwort:} Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke – kein Schutz vor Mustererkennung.
+
+  \item \textbf{Frage:} Wie funktioniert der CBC-Modus?\\
+  \textbf{Antwort:} Jeder Block wird mit dem vorherigen Chiffretextblock per XOR verknüpft; für den ersten Block wird ein Initialisierungsvektor (IV) verwendet.
+\end{itemize}
+
+\section*{Asymmetrische Kryptographie – RSA}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Frage:} Welche mathematischen Konzepte liegen RSA zugrunde?\\
+  \textbf{Antwort:} 
+  \begin{itemize}
+    \item Modulares Rechnen
+    \item Multiplikative Inverse
+    \item Modulares Potenzieren
+    \item Satz von Euler
+  \end{itemize}
+
+  \item \textbf{Frage:} Was bedeutet \(e \cdot d \equiv 1 \mod \varphi(n)\)?\\
+  \textbf{Antwort:} \(e\) und \(d\) sind zueinander multiplikativ inverse modulo \(\varphi(n)\); Voraussetzung für RSA.
+
+  \item \textbf{Frage:} Was ist der Unterschied zwischen öffentlichem und privatem Schlüssel bei RSA?\\
+  \textbf{Antwort:}
+  \begin{itemize}
+    \item \textbf{Öffentlicher Schlüssel:} \((n, e)\), bekannt für alle
+    \item \textbf{Privater Schlüssel:} \((n, d)\), geheim
+  \end{itemize}
+\end{itemize}
+
+\end{document}

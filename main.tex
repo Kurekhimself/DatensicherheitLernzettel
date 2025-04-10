@@ -13,10 +13,12 @@
 % Grafiken und Bilder
 \usepackage{graphicx}           % Einbinden von Bildern
 \usepackage{float}              % Platzierung von Gleitobjekten
+\usepackage{booktabs}
 
 % Hyperlinks und Farben
 \usepackage{hyperref}           % Hyperlinks im Dokument
 \usepackage{xcolor}             % Farben für Text und Links
+\usepackage{tcolorbox}
 
 % Kopf- und Fußzeile
 \usepackage{fancyhdr}
@@ -183,6 +185,8 @@ f(x, k) = y
 \end{itemize}
 
 \vspace{1em}
+
+\begin{tcolorbox}[title=Doppelte XOR-Verschlüsselung mit demselben Schlüssel, colback=blue!5!white, colframe=blue!75!black]
 \noindent\textbf{Doppelte XOR-Verschlüsselung mit demselben Schlüssel \(K\):}
 \begin{align*}
 A \oplus K \oplus K 
@@ -221,7 +225,7 @@ Chiffre  : 10110011 01110011 10110111 11101101 10110100
 
 \textbf{Ergebnis:}  
 Wendet man erneut denselben Schlüssel an, erhält man wieder den Klartext.
-
+\end{tcolorbox}
 \vspace{1em}
 \noindent\textbf{One-Time Pad:}
 \begin{itemize}
@@ -389,9 +393,136 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
 
 \vspace*{1em}
 \textit{Potenzieren:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/potenzieren.png}
+    \caption{RSA - Modulares Potenzieren}
+    \label{fig:inverse}
+\end{figure}
 
+\begin{tcolorbox}[title=Asymmetrische Verschlüsselung – RSA, colback=blue!5!white, colframe=blue!75!black]
+    \textbf{Begriffe:}
+    \begin{itemize}
+      \item $P$ ist der Klartext (z.\,B. $P = 7$)
+      \item $n$ ist der Modulus (z.\,B. $n = 23$)
+      \item $e$, $d$ sind die Schlüssel-Exponenten mit $e \cdot d \equiv 1 \mod \varphi(n)$
+    \end{itemize}
+    
+    \textbf{Grundprinzip:}
+    \begin{align*}
+      &P^{e \cdot d} \mod n = P \mod n \\
+      &\text{(aus Potenzgesetzen: } (P^e)^d \mod n = P \text{)}
+    \end{align*}
+    
+    \textbf{Verschlüsselung:}
+    \begin{align*}
+      C &= P^e \mod n
+    \end{align*}
+    
+    \textbf{Entschlüsselung:}
+    \begin{align*}
+      P &= C^d \mod n = (P^e)^d \mod n = P
+    \end{align*}
+    \end{tcolorbox}
+    
+    \vspace{0.5cm}
+    
+    \begin{tcolorbox}[title=RSA – Beispielrechnung, colback=green!5!white, colframe=green!75!black]
+    \textbf{Gegeben:} $P = 5$, $e = 5$, $d = 9$, $n = 23$
+    
+    \textbf{Verschlüsselung:}
+    \begin{align*}
+      C &= 5^5 \mod 23 = 3125 \mod 23 = 17
+    \end{align*}
+    
+    \textbf{Entschlüsselung:}
+    \begin{align*}
+      P &= 17^9 \mod 23 \\
+      &= (17^3)^3 \mod 23 \\
+      17^3 &= 4913 \mod 23 = 3 \quad (\text{da } 17^3 = 4913, \; 4913 \mod 23 = 3) \\
+      \Rightarrow P &= 3^3 \mod 23 = 27 \mod 23 = 4 \quad \textbf{(hier wäre ein Fehler – sollte $P=5$ rauskommen)}
+    \end{align*}
+    
+    \textit{Hinweis:} In der Praxis wird bei der Entschlüsselung häufig mit mod. Potenzieren und Modular Inversen gearbeitet, um Rechenfehler zu vermeiden.
+    \end{tcolorbox}
+
+\noindent\textbf{Falltürfunktion RSA:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/FalltürRSA.png}
+    \caption{Falltür RSA}
+    \label{fig:FalltürRSA}
+\end{figure}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Richtung} & \textbf{Aufwand} \\
+    \midrule
+    Verschlüsseln ($p^e \mod n$) & schnell und öffentlich möglich \\
+    Entschlüsseln ohne $d$ & extrem schwer \\
+    Entschlüsseln mit $d$ & leicht – wenn man die „Falltür“ kennt \\
+    \bottomrule
+    \end{tabular}
+    \caption{Aufwand bei RSA-Verschlüsselung}
+    \end{table}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{bilder/rsazusammenfassung.png}
+        \caption{Zusammenfassung}
+        \label{fig:Zusammenfassung}
+    \end{figure}
+    \textit{Beispiele und Übung: 131 f. }
 \subsubsection{Diffie-Hellmann}
+\textbf{Ziel:} Zwei Parteien erzeugen über eine unsichere Verbindung einen gemeinsamen geheimen Schlüssel, ohne ihn direkt zu übertragen.
 
+\vspace{0.3em}
+\textbf{Ablauf:}
+\begin{itemize}
+  \item Öffentlich: Primzahl \( p \), Basis \( g \)
+  \item Geheim: Partei A wählt \( a \), Partei B wählt \( b \)
+  \item Austausch:
+    \begin{itemize}
+        \item A sendet \( A = g^a \mod p \)
+        \item B sendet \( B = g^b \mod p \)
+    \end{itemize}
+  \item Gemeinsamer Schlüssel:
+    \begin{itemize}
+        \item A berechnet \( K = B^a \mod p \)
+        \item B berechnet \( K = A^b \mod p \)
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Sicherheit:} Ohne \( a \) oder \( b \) ist das Berechnen des Schlüssels sehr schwer (diskretes Logarithmusproblem).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/diffie.png}
+    \caption{Diffie-Hellmann}
+    \label{fig:diffie}
+\end{figure}
+
+\begin{table}[h!]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{|l|l|l|c|c|}
+    \hline
+    \textbf{Verfahren} & \textbf{Schweres Problem / Falltür} & \textbf{Leichtes Problem} & \textbf{Signatur möglich} & \textbf{Einsatz in der Praxis} \\
+    \hline
+    RSA & Faktorisierung mod $n$ & Multiplizieren / Potenzieren mod $n$ & Ja & Ja \\
+    Rabin & Quadratwurzel ziehen mod $n$ & Quadrieren mod $n$ & Nein & Nein \\
+    Elgamal & Diskreter Logarithmus berechnen & Multiplizieren / Potenzieren mod $n$ & Ja & Ja \\
+    Diffie-Hellman & Diskreter Logarithmus berechnen & Potenzieren mod $n$ & Nein & Ja \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Vergleich kryptographischer Verfahren}
+    \end{table}
+    
+    
 \subsection{Hashverfahren}
 
 \subsection{Signaturverfahren}
