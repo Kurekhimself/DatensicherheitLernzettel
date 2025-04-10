@@ -137,7 +137,7 @@ f(x, k) = y
 \vspace{1em}
 \noindent\textbf{Cäsar-Verschlüsselung:}
 \begin{itemize}
-    \item Verschiebung um 3 Stellen (z. B. A → D, B → E)
+    \item Verschlüsselung um 3 Stellen (z.B. A - D, B - E)
 \end{itemize}
 
 \vspace{1em}
@@ -253,7 +253,7 @@ Wendet man erneut denselben Schlüssel an, erhält man wieder den Klartext.
 \end{itemize}
 \vspace{1em}
 \noindent\textbf{Blockchiffren:}
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{bilder/blockchiffren.png}
     \caption{Blockchiffren}
@@ -264,33 +264,106 @@ Wendet man erneut denselben Schlüssel an, erhält man wieder den Klartext.
 \noindent\textbf{AES vs. DES:}
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l|l|l|}
-        \hline
-        \textbf{Kriterium} & \textbf{DES} & \textbf{AES} \\
-        \hline
-        Schlüssellänge & 64 Bit wobei 8 nicht genutzt & 128, 192 oder 256 Bit \\
-        \hline
-        Blockgröße & 64 Bit & 128 Bit \\
-        \hline
-        Struktur & Substitutionenund Permutationenin einer Feistel-Konstruktion & Substitutions-Permutations-Netzwerk \\
-        \hline
-        Runden & 16 & 10 (128 Bit), 12 (192 Bit), 14 (256 Bit) \\
-        \hline
-        Sicherheit & Als unsicher eingestuft & Derzeit als sicher eingestuft \\
-        \hline
-        Standardisierung & Veraltet (NIST 1977) & Aktueller Standard (NIST 2001) \\
-        \hline
-    \end{tabular}
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{|l|l|l|}
+            \hline
+            \textbf{Kriterium} & \textbf{DES} & \textbf{AES} \\
+            \hline
+            Schlüssellänge & 64 Bit wobei 8 nicht genutzt & 128, 192 oder 256 Bit \\
+            \hline
+            Blockgröße & 64 Bit & 128 Bit \\
+            \hline
+            Struktur & Substitutionenund Permutationenin einer Feistel-Konstruktion & Substitutions-Permutations-Netzwerk \\
+            \hline
+            Runden & 16 & 10 (128 Bit), 12 (192 Bit), 14 (256 Bit) \\
+            \hline
+            Sicherheit & Als unsicher eingestuft & Derzeit als sicher eingestuft \\
+            \hline
+            Standardisierung & Veraltet (NIST 1977) & Aktueller Standard (NIST 2001) \\
+            \hline
+        \end{tabular}
+    }
     \caption{Vergleich zwischen DES und AES}
     \label{tab:aes_vs_des}
 \end{table}
+
 \vspace{1em}
 \noindent\textbf{Betribsmodus:}
 \vspace{1em}
 
+\noindent\textbf{ECB - Electronic Code Block}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/ecb.png}
+    \caption{ECB}
+    \label{fig:ecb}
+\end{figure}
+
+\[ P = P_{1}P_{2}P_{3}P_{n}\]
+\begin{itemize}
+    \item Verschlüsselung: \[C_{i}=E_{k}(P_{i})\]
+    \item Entschlüsselung: \[P_{i}=D_{k}(C_{i})\]
+\end{itemize}
+Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
+
+\vspace{1em}
+\noindent\textbf{CBC - Cipher Block Chaining}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/cbc.png}
+    \caption{CBC}
+    \label{fig:cbc}
+\end{figure}
+\[ P = P_{1}P_{2}P_{3}P_{n}\]
+\[C_{0} = IV (Initialisierungsvektor)\]
+\begin{itemize}
+    \item Verschlüsselung: \[C_{i}=E_{K}(C_{i-1}\oplus P_{i})\]
+    \item Entschlüsselung: \[P_{i} = D_{K}(C_{i}) \oplus C_{i-1}\]
+\end{itemize}
+\textit{Übungen auf Folie 102}
+
+\vspace{1em}
+\noindent\textbf{OFB - Output Feedback Modus}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/ofb.png}
+    \caption{OFB}
+    \label{fig:ofb}
+\end{figure}
+
+\vspace{1em}
+\noindent\textbf{CTR - Counter Modus}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/ctr.png}
+    \caption{CTR}
+    \label{fig:ctr}
+\end{figure}
 
 \subsection{Asymmetrische Verfahren}
 \subsubsection{RSA}
+\begin{itemize}
+    \item Modulares Rechnen
+    \item Multiplikative Inverse
+    \item Modulares Potenzieren
+    \item Satz von Euler
+    \item RSA Kryptosystem
+\end{itemize}
+
+\noindent\textbf{Modulares Rechen}\\
+\textit{Modulo} (\%) ist definiert als die ganzzahlige Division mit Rest: 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        $12 \bmod 5 = 2$ & $(\text{da } 12 - (2 \cdot 5) = 2)$ \\
+        $23 \bmod 4 = 3$ & $(\text{da } 23 - (5 * 4) = 3)$ \\
+        $3 * 8 \bmod 7 = 3$ & $(\text{da } 24 - (3 * 7) = 3)$ \\
+        $9 * 9 \bmod 2 = 1$ & $(\text{da } 81 - (40 * 2) = 1)$ \\
+    \end{tabular}
+\end{table}
+
+
+
 \subsubsection{Diffie-Hellmann}
 
 \subsection{Hashverfahren}
