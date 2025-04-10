@@ -330,6 +330,7 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \caption{OFB}
     \label{fig:ofb}
 \end{figure}
+\textit{nicht umbedingt Klausurrelevant}
 
 \vspace{1em}
 \noindent\textbf{CTR - Counter Modus}
@@ -339,7 +340,7 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \caption{CTR}
     \label{fig:ctr}
 \end{figure}
-
+\textit{nicht umbedingt Klausurrelevant}
 \subsection{Asymmetrische Verfahren}
 \subsubsection{RSA}
 \begin{itemize}
@@ -362,7 +363,32 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \end{tabular}
 \end{table}
 
+\begin{align*}
+    \text{I.} \quad &(a + b) \bmod n = ((a \bmod n) + (b \bmod n)) \bmod n \\
+    \text{II.} \quad &(a \cdot b) \bmod n = ((a \bmod n) \cdot (b \bmod n)) \bmod n
+    \end{align*}
 
+    \begin{align*}
+    40 + 51 \bmod 2 &= ((40 \bmod 2) + (51 \bmod 2)) \bmod 2 \\
+    91 \bmod 2 &= (0 + 1) \bmod 2 = 1
+    \end{align*}
+    
+    \begin{align*}
+    999 \cdot 121 \bmod 3 &= ((999 \bmod 3) \cdot (121 \bmod 3)) \bmod 3 \\
+    &= (0 \cdot 1) \bmod 3 = 0
+    \end{align*}
+\vspace*{1em}
+\textit{Inverse:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/inverse.png}
+    \caption{Inverse - mit Multiplikationstabelle}
+    \label{fig:inverse}
+\end{figure}
+Übunngen auf Folie 117
+
+\vspace*{1em}
+\textit{Potenzieren:}
 
 \subsubsection{Diffie-Hellmann}
 
