@@ -22,6 +22,8 @@
 
 % Kopf- und Fußzeile
 \usepackage{fancyhdr}
+\usepackage[sfdefault,lf]{carlito}
+
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Datensicherheit Lernzettel}
@@ -355,6 +357,7 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \item RSA Kryptosystem
 \end{itemize}
 
+\begin{tcolorbox}[title=Modulares Rechen, colback=blue!5!white, colframe=blue!75!black]
 \noindent\textbf{Modulares Rechen}\\
 \textit{Modulo} (\%) ist definiert als die ganzzahlige Division mit Rest: 
 \begin{table}[H]
@@ -389,9 +392,10 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \caption{Inverse - mit Multiplikationstabelle}
     \label{fig:inverse}
 \end{figure}
-Übunngen auf Folie 117
-
+Übungen auf Folie 117
+\end{tcolorbox}
 \vspace*{1em}
+\begin{tcolorbox}[title=Potenzieren, colback=green!5!white, colframe=green!75!black]
 \textit{Potenzieren:}
 \begin{figure}[H]
     \centering
@@ -399,7 +403,7 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     \caption{RSA - Modulares Potenzieren}
     \label{fig:inverse}
 \end{figure}
-
+\end{tcolorbox}
 \begin{tcolorbox}[title=Asymmetrische Verschlüsselung – RSA, colback=blue!5!white, colframe=blue!75!black]
     \textbf{Begriffe:}
     \begin{itemize}
@@ -524,9 +528,49 @@ Gleiche Klartextblöcke ergeben gleiche Chiffretextblöcke.
     
     
 \subsection{Hashverfahren}
+Eine Hashfunktion berechnet aus beliebig kodierten Daten eine Prüfsumme.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/hashfalltür.png}
+    \caption{Falltür - Hashverfahren}
+    \label{fig:hash}
+\end{figure}
 
+Annforderungen an kryptographisch sichere Hashfunktion:
+\begin{itemize}
+    \item Eindeutigkeit: Eine identische Zeichennfolge muss zum selben Hash-Wert führen. 
+    \item Reversibilität: Aus einem Hashwert darf nicht das Urbild zurückberechnet werden können.
+    \item Kollisionsresistenz: Es dürfen nicht zwei unterschiedliche Zeicehnfolgen bekannt sein, die den gleichen Hash-Wert ergeben. 
+    \item Lawineneffekt: Eine 1-Bit-Änderung um Urbild sollte den Hashwert zu 50\% Verändern. 
+\end{itemize}
 \subsection{Signaturverfahren}
-\subsubsection{Digitale Signatur am Beispiel RSA}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/signaturRSA.png}
+    \caption{Signatur - RSA Verfahren}
+    \label{fig:signatur}
+\end{figure}
+\textit{Übung auf S. 172}
+
 \subsubsection{Hierarchiemodelle}
+\noindent\textbf{Hierarchiemodelle und Wurzelzertifikat:}\\
+\vspace{1em}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/wurzel.png}
+    \caption{Signatur - Wurzelzertifikat}
+    \label{fig:wurzel}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/hierarchiemodelle.png}
+    \caption{Signatur - Hierarchiemodelle}
+    \label{fig:Hierarchiemodelle}
+\end{figure}
+\textit{Übung auf S. 181}
+
+
 
 \end{document}
